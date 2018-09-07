@@ -1,0 +1,35 @@
+body {
+    font-family: "PingFangSC-Light", sans-serif;
+    font-size: 16px;
+    margin: 0px;
+    line-height: 32px;
+
+}
+
+p {
+    text-align: center;
+    line-height: 26px;
+    margin-top: 14px;
+}
+
+img {
+    margin: 5px 0px;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.day {
+    font-size: 48px;
+    padding: 0px;
+    margin: 0px;
+    font-family: Serif;
+}
+
+.text-content {
+    line-height: 26px;
+    margin-top: 14px;
+}
+.head{
+margin-bottom: 5px;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="http://forcebing.top/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <title>one for me </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <link href="css/css.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        window.onload = function () {
+            $.getJSON("articleexport.json", function (data) {
+                $.each(data, function (i, item) {
+                    $("#disp").append("<img src='" + item.imgUrl[0] + "' class='imgg'>");
+                    $("#disp").append("<p class='text-content'>" + item.text[0] + "</p>");
+                    $("#disp").append("<p class='day'>" + item.day[0] + "</p>")
+                    $("#disp").append("<p>" + item.month[0] + "</p>");
+                    return false
+                });
+            });
+        }
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <!-- Content here -->
+    <p class="head">每日一句</p>
+    <div id="disp"></div>
+
+</div>
+</body>
+</html>
