@@ -13,17 +13,17 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <link href="css/css.css" rel="stylesheet" type="text/css">
     <script type="text/javascript">
-        window.onload = function () {
-            $.getJSON("articleexport.json", function (data) {
-                $.each(data, function (i, item) {
-                    $("#disp").append("<img src='" + item.imgUrl[0] + "' class='imgg'>");
-                    $("#disp").append("<p class='text-content'>" + item.text[0] + "</p>");
-                    $("#disp").append("<p class='day'>" + item.day[0] + "</p>")
-                    $("#disp").append("<p>" + item.month[0] + "</p>");
-                    return false
-                });
-            });
-        }
+        /*        window.onload = function () {
+                    $.getJSON("articleexport.json", function (data) {
+                        $.each(data, function (i, item) {
+                            $("#disp").append("<img src='" + item.imgUrl[0] + "' class='imgg'>");
+                            $("#disp").append("<p class='text-content'>" + item.text[0] + "</p>");
+                            $("#disp").append("<p class='day'>" + item.day[0] + "</p>")
+                            $("#disp").append("<p>" + item.month[0] + "</p>");
+                            return false
+                        });
+                    });
+                }*/
     </script>
 </head>
 
@@ -31,8 +31,78 @@
 <div class="container">
     <!-- Content here -->
     <p class="head">每日一句</p>
-    <div id="disp"></div>
+    <div id="disp">
 
+        <img id="imgg" src="http://image.wufazhuce.com/FkLM1eJH209S21sA5iMJ8fkc_0gP" class="imgg">
+        <p id="textt" class="text-content">生活是苦的，食物却能带来一丝暂时的甜。</p>
+        <p id="dayy" class="day">27</p>
+        <p id="monthh">Aug. 2018</p>
+
+    </div>
+
+    <div id="divv">
+        <div id="up" onclick="up()"><span>上一篇</span></div>
+        <div id="down" onclick="down()"><span>下一篇</span></div>
+    </div>
+
+    <script>
+
+        window.onload = function () {
+            $.get("http://localhost:8080/max",
+                    function (data) {
+                        change(data)
+                        console.log(data)
+                        sessionStorage.setItem("full_id", data.f_id)
+                        localStorage.setItem("full_id", data.f_id)
+                    })
+        }
+
+        function change(data) {
+            document.getElementById("imgg").src = data.imgUrl
+            document.getElementById("textt").innerHTML = data.text
+            document.getElementById("dayy").innerText = data.day
+            document.getElementById("monthh").innerHTML = data.month
+        }
+
+        function up() {
+            var lfull_id = localStorage.getItem("full_id")
+            var sfull_id = sessionStorage.getItem("full_id")
+
+            console.log(sfull_id + "===="+lfull_id)
+            if (sfull_id >= lfull_id) {
+                alert("已经是最新篇章了")
+
+            } else {
+                sessionStorage.setItem("full_id", Number(sfull_id)+1)
+                findbyfullId(Number(sfull_id)+1)
+
+            }
+        }
+
+        function down() {
+            var sfull_id = sessionStorage.getItem("full_id")
+
+
+            sessionStorage.setItem("full_id", sfull_id - 1)
+            findbyfullId(sfull_id - 1)
+
+        }
+
+
+        function findbyfullId(full_id) {
+
+            console.log(full_id)
+            $.post("http://localhost:8080/find_one",
+                    {
+                        full_id: full_id
+                    },function (data) {
+                        change(data)
+
+                    })
+        }
+
+
+    </script>
 </div>
 </body>
 </html>

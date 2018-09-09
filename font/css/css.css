@@ -30,6 +30,26 @@ img {
     line-height: 26px;
     margin-top: 14px;
 }
-.head{
-margin-bottom: 5px;
+
+.head {
+    margin-bottom: 5px;
+}
+
+#down {
+    float: right;
+    display: inline-block;
+    margin: 5px 15px;
+
+}
+
+
+#up {
+    display: inline-block;
+    float: left;
+    margin: 5px 15px;
+}
+#divv{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
 }

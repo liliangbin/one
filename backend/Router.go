@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"./logger"
+
 )
 
 func NewRouter() *mux.Router {
@@ -31,17 +32,16 @@ var routes = Routes{
 		"GET",
 		"/",
 		Index,
-	},
-	Route{
-		"TodoIndex",
+	},Route{
+		"Max",
 		"GET",
-		"/todos",
-		TodoIndex,
+		"/max",
+		TheMax,
+	},Route{
+		"findbyId",
+		"POST",
+		"/find_one",
+		FindById,
 	},
-	Route{
-		"TodoShow",
-		"GET",
-		"/todos/{todoId}",
-		TodoShow,
-	},
+
 }

@@ -7,4 +7,19 @@
 #### 启动
 - go run insert.go   //数据的存取
 - go build Web.go   ./Web   //http服务器的开启
-- 
+- 面向对象编程，
+```go
+
+    type Todo struct{
+        name string
+    }
+    func hh(index Todo){
+    index.name="in"
+    }
+
+    func hh(index Todo){
+      index.name="in"
+     }
+
+
+```
