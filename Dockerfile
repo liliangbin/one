@@ -1,18 +1,14 @@
-FROM centos:7
-MAINTAINER mhanzaipeng 493096871@qq.com
+FROM alpine
 
+ENV PORT    4396
+ENV UUID    c95ef1d4-f3ac-4586-96e9-234a37dda068
+ENV PROTOCOL    vless
 
-RUN yum install -y gcc gcc-c++ glibc make autoconf openssl openssl-devel wget
-RUN yum update -y
-
-RUN yum install -y libxslt-devel -y gd gd-devel  pcre pcre-devel
-RUN wget http://nginx.org/download/nginx-1.14.0.tar.gz && tar -zxvf  nginx-1.14.0.tar.gz \
-    && cp -r nginx-1.14.0 /usr/local/
-RUN useradd -M -s /sbin/nologin nginx
-WORKDIR /usr/local/nginx-1.14.0
-RUN ./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-file-aio --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_xslt_module --with-http_image_filter_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_stub_status_module && make && make install
-
-RUN ls /usr/local
-EXPOSE 80
-
-CMD /bin/sh -c '/usr/local/nginx/sbin/nginx  -g "daemon off;"'
+RUN apk update && apk add --no-cache unzip ca-certificates && \
+    wget -c https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip && \
+    unzip v2ray-linux-64.zip && rm -f v2ray-linux-64.zip && \
+    chmod 700 v2ray v2ctl
+    
+ADD start.sh /start.sh
+RUN chmod +x /start.sh
+CMD /start.sh
